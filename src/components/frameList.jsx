@@ -4,41 +4,50 @@ export class FrameList extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.filter !== 'none') {
-      ___apply filters___
+    this.wrapFabricCanvases();
+    this.setCanvasBackgrounds();
+    // this.applyFilters();
+  }
+
+  componentDidUpdate(oldProps) {
+    if (oldProps.images !== props.images) {
+      this.wrapFabricCanvases();
+      this.setCanvasBackgrounds();
+      // this.applyFilters();
     }
   }
 
-  componentWillRecieveProps(newProps) {
-    if (newProps !== this.props) {
-      ___apply filters___
-    }
+  // componentWillRecieveProps(newProps) {
+  //   if (newProps !== this.props) {
+  //     this.applyFilters();
+  //   }
+  // }
+
+  // Wrap each of the rendered canvases in fabric canvases:
+  wrapFabricCanvases() {
+    const fabricCanvases = document.querySelectorAll('.frameCanvas')
+      .map((canvas) => new fabric.Canvas(canvas.id));
+    this.props.setCanvases(fabricCanvases);
   }
 
-  applyFilters() {
-    const canvases = ___get canvases___;
-    canvases.map(___apply filter___);
+  setCanvasBackgrounds() {
+    this.props.canvases.forEach((canvas, index) => canvas.setBackgroundImage(this.props.images[index]));
   }
+
+  // applyFilters() {
+  //   const canvases = ___get canvases___;
+  //   canvases.map(___apply filter___);
+  // }
 
   render() {
     <div className="frameList">
-      {mapFramesToCanvases(props.images)}
+      {frames.map((frame, index) => <ImageCanvas key={index} />)}
     </div>
   }
 }
 
-function mapFramesToCanvases(frames) {
-  return frames.map((frame, index) => {
-    const newCanvas = <ImageCanvas key={index} />
-    const width = Math.min(frame.width, newCanvas.width);
-    const height = Math.min(frame.height, newCanvas.height);
-    newCanvas.getContext('2d').drawImage(frame, 0, 0, width, height);
-    return newCanvas;
-  });
-}
-
 const ImageCanvas = ({ key }) => (
-  <canvas key={key} height="100px" width="100px">
+  <canvas key={key} id={`frame${index}`} className="frameCanvas" height="100px" width="100px">
     Image uploaded to be a frame in your gif.
   </canvas>
 );

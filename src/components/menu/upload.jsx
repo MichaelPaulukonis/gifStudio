@@ -17,6 +17,8 @@ function uploadImage(url) {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.src = window.URL.createObjectURL(url);
-    image.onLoad(resolve(image));
+    image.onLoad((image) => resolve(new fabric.Image(image, fabricImageOptions)));
   });
 }
+
+const fabricImageOptions = {};

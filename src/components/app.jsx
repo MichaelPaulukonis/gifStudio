@@ -3,6 +3,7 @@ export class App() {
     this.state = {
       shouldShowMenu: false,
       images: [],
+      canvases: [],
       filter: 'none'
     };
   }
@@ -13,6 +14,10 @@ export class App() {
 
   setImages(images) {
     this.state.setState({ images: images });
+  }
+
+  setCanvases(canvases) {
+    this.state.setState({ canvases: canvases });
   }
 
   setFilter(filter) {
@@ -28,7 +33,7 @@ export class App() {
           <Menu hidden={this.state.shouldShowMenu} setImages={this.setImages} setFilter={this.setFilter} />
         </div>
 
-        <FrameList images={this.state.images} filter={this.state.filter} />
+        <FrameList images={this.state.images} canvases={this.state.canvases} filter={this.state.filter} setCanvases={this.setCanvases} />
 
         <div className="footer">
           <button id="generateButton" onClick={this.generateGif}>Generate</button>

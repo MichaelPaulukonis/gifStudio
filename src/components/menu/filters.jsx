@@ -1,18 +1,16 @@
 export class Filters{
-  constructor() {
+  constructor() {}
 
-  }
-
-  setFilter(filter) {
-    if (filter === 'none') {
-      this.setCanvases(___original images___);
-    } else {
-      ___iterate over frames and apply the filters___
-    }
-  }
+  // setFilter(filter) {
+  //   if (filter === 'none') {
+  //     this.setCanvases(___original images___);
+  //   } else {
+  //     ___iterate over frames and apply the filters___
+  //   }
+  // }
 
   render() {
-
+    <div></div>
   }
 }
 
