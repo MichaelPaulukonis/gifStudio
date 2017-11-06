@@ -1,24 +1,25 @@
+import React from 'react';
+const fabric = window.fabric;
+
 export const Upload = ({ setImages }) => (
   <div>
     <input id="imageUploadInput" type="file" accept="image/*" multiple></input>
-    <button onClick={this.uploadImages(setImages)}>Upload</button>
+    <button onClick={() => uploadImages(setImages)}>Upload</button>
   </div>
 );
 
 function uploadImages(setImages) {
   const input = document.getElementById('imageUploadInput');
-  if (input.length > 0) {
-    Promise.all(input.files.map(uploadImage))
+  if (input && input.files.length > 0) {
+    Promise.all(Array.from(input.files).map(uploadImage))
     .then(setImages);
   }
 };
 
 function uploadImage(url) {
   return new Promise((resolve, reject) => {
-    const image = new Image();
+    const image = new Image(100, 100);
+    image.onload = () => resolve(new fabric.Image(image));
     image.src = window.URL.createObjectURL(url);
-    image.onLoad((image) => resolve(new fabric.Image(image, fabricImageOptions)));
   });
 }
-
-const fabricImageOptions = {};

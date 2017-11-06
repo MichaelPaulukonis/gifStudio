@@ -1,27 +1,40 @@
-export class App() {
-  constructor() {
+import React from 'react';
+
+import Menu from './menu/menu';
+import FrameList from './frameList';
+import Preview from './preview';
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
     this.state = {
       shouldShowMenu: false,
       images: [],
       canvases: [],
       filter: 'none'
     };
+
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.setImages = this.setImages.bind(this);
+    this.setCanvases = this.setCanvases.bind(this);
+    this.setFilter = this.setFilter.bind(this);
   }
 
   toggleMenu() {
-    this.state.setState({ shouldShowMenu: !this.state.shouldShowMenu });
+    this.setState({ shouldShowMenu: !this.state.shouldShowMenu });
   }
 
   setImages(images) {
-    this.state.setState({ images: images });
+    this.setState({ images: images });
   }
 
   setCanvases(canvases) {
-    this.state.setState({ canvases: canvases });
+    this.setState({ canvases: canvases });
   }
 
   setFilter(filter) {
-    this.state.setState({ filter: filter });
+    this.setState({ filter: filter });
   }
 
   render() {
@@ -29,7 +42,7 @@ export class App() {
       <div className="app">
         <div className="header">
           <button id="menuButton" onClick={this.toggleMenu}>Menu</button>
-          <img id="logo" src="___toDo___"></img>
+          <img id="logo" src="___toDo___" alt="logo"></img>
           <Menu hidden={this.state.shouldShowMenu} setImages={this.setImages} setFilter={this.setFilter} />
         </div>
 

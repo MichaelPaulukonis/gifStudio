@@ -1,6 +1,6 @@
-export class Filters{
-  constructor() {}
+import React from 'react';
 
+export default class Filters extends React.Component {
   // setFilter(filter) {
   //   if (filter === 'none') {
   //     this.setCanvases(___original images___);
@@ -10,10 +10,12 @@ export class Filters{
   // }
 
   render() {
-    <div></div>
+    return (
+      <div></div>
+    );
   }
 }
 
-const filters = {
-  none: {name: none, function: () => {}}
-};
+// const filters = {
+//   none: {name: 'none', function: () => {}}
+// };

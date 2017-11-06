@@ -1,19 +1,15 @@
-export class FrameList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+import React from 'react';
 
+const fabric = window.fabric;
+
+export default class FrameList extends React.Component {
   componentDidMount() {
     this.wrapFabricCanvases();
-    this.setCanvasBackgrounds();
-    // this.applyFilters();
   }
 
   componentDidUpdate(oldProps) {
-    if (oldProps.images !== props.images) {
+    if (oldProps.images !== this.props.images) {
       this.wrapFabricCanvases();
-      this.setCanvasBackgrounds();
-      // this.applyFilters();
     }
   }
 
@@ -25,29 +21,32 @@ export class FrameList extends React.Component {
 
   // Wrap each of the rendered canvases in fabric canvases:
   wrapFabricCanvases() {
-    const fabricCanvases = document.querySelectorAll('.frameCanvas')
-      .map((canvas) => new fabric.Canvas(canvas.id));
+    const fabricCanvases = Array.from(document.querySelectorAll('.frameCanvas'))
+      .map((canvas, index) => {
+        const fabricCanvas = new fabric.Canvas(canvas.id);
+        const filteredImage = this.applyFilter(this.props.images[index]);
+        fabricCanvas.setBackgroundImage(filteredImage);
+        fabricCanvas.renderAll();
+        return fabricCanvas;
+      });
     this.props.setCanvases(fabricCanvases);
   }
 
-  setCanvasBackgrounds() {
-    this.props.canvases.forEach((canvas, index) => canvas.setBackgroundImage(this.props.images[index]));
+  applyFilter(image) {
+    return image;
   }
 
-  // applyFilters() {
-  //   const canvases = ___get canvases___;
-  //   canvases.map(___apply filter___);
-  // }
-
   render() {
-    <div className="frameList">
-      {frames.map((frame, index) => <ImageCanvas key={index} />)}
-    </div>
+    return (
+      <div className="frameList">
+        {this.props.images.map((frame, index) => <ImageCanvas key={index} id={`frame${index}`} />)}
+      </div>
+    );
   }
 }
 
-const ImageCanvas = ({ key }) => (
-  <canvas key={key} id={`frame${index}`} className="frameCanvas" height="100px" width="100px">
+const ImageCanvas = ({id}) => (
+  <canvas className="frameCanvas" id={id} height="100px" width="100px">
     Image uploaded to be a frame in your gif.
   </canvas>
 );
