@@ -6,13 +6,13 @@ const filterOptions = {
   grayscale: () => new f.Grayscale(),
   invert: () => new f.Invert(),
   sepia: () => new f.Sepia(),
-  brownie: () => new f.Brownie(),
-  vintage: () => new f.Vintage(),
-  pixelate: () => new f.Pixelate({ blocksize: 10 }),
-  technicolor: () => new f.Technicolor(),
-  polaroid: () => new f.Polaroid(),
-  kodachrome: () => new f.Kodachrome(),
-  blackwhite: () => new f.BlackWhite()
+  // brownie: () => new f.Brownie(),
+  // vintage: () => new f.Vintage(),
+  pixelate: () => new f.Pixelate({ blocksize: 3 }),
+  // technicolor: () => new f.Technicolor(),
+  // polaroid: () => new f.Polaroid(),
+  // kodachrome: () => new f.Kodachrome(),
+  // blackwhite: () => new f.BlackWhite()
 }
 
 export const Filters = ({images, setImages}) => (
@@ -22,21 +22,21 @@ export const Filters = ({images, setImages}) => (
       <option value="grayscale">Grayscale</option>
       <option value="invert">Invert</option>
       <option value="sepia">Sepia</option>
-      <option value="brownie">Brownie</option>
-      <option value="vintage">Vintage</option>
+      {/* <option value="brownie">Brownie</option>
+      <option value="vintage">Vintage</option> */}
       <option value="pixelate">Pixelate</option>
-      <option value="technicolor">Technicolor</option>
+      {/* <option value="technicolor">Technicolor</option>
       <option value="poloroid">Poloroid</option>
       <option value="kodachrome">Kodachrome</option>
-      <option value="blackwhite">Black and White</option>
+      <option value="blackwhite">Black and White</option> */}
     </select>
   </div>
 );
 
 function filterImages(images, filter) {
+  const filterObject = filterOptions[filter]();
   return images.map((image) => {
-    image.filters = [filterOptions[filter]()];
-    image.applyFilters();
+    image.filters = [filterObject];
     return image;
   });
 }
