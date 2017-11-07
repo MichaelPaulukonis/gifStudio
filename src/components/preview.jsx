@@ -26,7 +26,7 @@ export default class Preview extends React.Component {
   startInterval() {
     if (this.props.images.length > 0) {
       window.clearInterval(this.interval);
-      this.setState({ currentFrame: 0 }, () => this.interval = window.setInterval(this.iterateThroughFrames, 1000));
+      this.setState({ currentFrame: 0 }, () => this.interval = window.setInterval(this.iterateThroughFrames, 500));
     }
   }
 

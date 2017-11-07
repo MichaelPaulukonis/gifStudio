@@ -4,7 +4,7 @@ const fabric = window.fabric;
 export const Upload = ({ setImages }) => (
   <div>
     <input id="imageUploadInput" type="file" accept="image/*" multiple></input>
-    <button onClick={() => uploadImages(setImages)}>Upload</button>
+    <button onClick={() => uploadImages(setImages)}><i className="material-icons">file_upload</i></button>
   </div>
 );
 
