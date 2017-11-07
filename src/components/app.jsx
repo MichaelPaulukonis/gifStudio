@@ -52,7 +52,9 @@ export default class App extends React.Component {
         <div className="header">
           <button id="menuButton" onClick={this.toggleMenu}><i className="material-icons">menu</i></button>
           <img id="logo" src="___toDo___" alt="logo"></img>
-          <Menu hidden={this.state.shouldShowMenu} images={this.state.images} setImages={this.setImages} />
+          {this.state.shouldShowMenu
+            ? <Menu hidden={this.state.shouldShowMenu} images={this.state.images} setImages={this.setImages} />
+            : null}
         </div>
 
         <FrameList images={this.state.images} />
