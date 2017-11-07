@@ -18,3 +18,7 @@ button {
   padding: 5px;
   margin: 10px;
 }
+
+#delayInput {
+  width: 50px
+}

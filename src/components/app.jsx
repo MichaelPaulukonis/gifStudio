@@ -26,7 +26,7 @@ export default class App extends React.Component {
     this.setState({ images: images });
   }
 
-  generateGif() {
+  generateGif(delay) {
     if (this.state.images.length === 0) {
       return;
     }
@@ -41,7 +41,7 @@ export default class App extends React.Component {
     });
 
     document.querySelectorAll('.frameCanvas')
-      .forEach((canvas) => gif.addFrame(canvas, { delay: 500 }));
+      .forEach((canvas) => gif.addFrame(canvas, { delay: delay }));
 
     gif.render();
   }
@@ -58,7 +58,10 @@ export default class App extends React.Component {
         <FrameList images={this.state.images} />
 
         <div className="footer">
-          <button id="generateButton" onClick={this.generateGif}>Generate</button>
+          Delay: <input type="number" id="delayInput" defaultValue="500"></input>
+          <button id="generateButton" onClick={() => this.generateGif(document.getElementById('delayInput').value)}>
+            Generate
+          </button>
         </div>
       </div>
     );
